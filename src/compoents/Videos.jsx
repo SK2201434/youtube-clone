@@ -3,6 +3,7 @@ import VideoCard from "./VideoCard";
 import ChannelCard from "./ChannelCard";
 
 const Videos = ({ videos }) => {
+  console.log(videos)
   if (!videos || videos.length === 0) {
     // Handle the case where videos is undefined or empty
     return <p>No videos available</p>;
