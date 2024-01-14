@@ -8,10 +8,22 @@ const Feed = () => {
   const [selectedCategory,setSelectedCategory] = useState('New');
   const [videos, setVideos] = useState([]);
 
-  useEffect(()=>{
-    FetchFromApi(`search?part=snippet&q=${selectedCategory}`).then((data)=>
-    setVideos(data.items))
-  },[selectedCategory]);
+  useEffect(() => {
+    FetchFromApi(`search?part=snippet&q=${selectedCategory}`)
+      .then((data) => {
+        // Ensure 'data' is defined before trying to access 'items'
+        if (data && data.items) {
+          setVideos(data.items);
+        } else {
+          console.error("API response is missing expected data structure:", data);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, [selectedCategory]);
+  
+  
   
   
   return (
